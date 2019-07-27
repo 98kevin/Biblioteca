@@ -119,4 +119,25 @@ public class Prestamo implements Serializable{
         this.carnet = carnet;
         this.fecha = (fecha==null)?getFechaActual():fecha;
     }
+    
+    /**
+     * Analiza la cantidad de libros que tiene un estudiante y verifica si puede prestar mas libros
+     * @param carnet El carnet del estudiante solicitante
+     * @return Verdadero si tiene dos libros o menos
+     */
+    public boolean validacionDePrestamo(int carnet){
+        String path= "Estudiantes/"+String.valueOf(carnet)+".std";
+        Estudiante estudiante = (Estudiante) Archivo.leerArchivo(path);
+        return (estudiante.getCantidadDeLibrosEnPrestamo()<=3);
+    }
+    
+    public int calcularDiasEnPrestamo(String codigoLibro, int carnet, Date fechaInicial){
+        Date fechaActual= new Date(Calendar.getInstance().getTimeInMillis());
+        boolean tieneDias=true;
+        while (!tieneDias) {
+            
+        }
+        return 1;
+    }
+    
 }
