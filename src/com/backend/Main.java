@@ -5,6 +5,8 @@
  */
 package com.backend;
 
+import com.frontend.Principal;
+
 
 //import com.frontend.Biblioteca_Cunoc;
 //import com.frontend.Principal;
@@ -16,7 +18,7 @@ package com.backend;
 public class Main {
     public static void main(String [] args){
         
-       // new Principal();
+        new Principal().setVisible(true);;
         
         Archivo.createDirectory("Contadores");
         Archivo.createDirectory("Estudiantes");
