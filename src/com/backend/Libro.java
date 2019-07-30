@@ -7,6 +7,9 @@ package com.backend;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JTextArea;
 
@@ -210,5 +213,27 @@ public class Libro implements Serializable{
     	String token[]=instruccion.split(":");
     	return Integer.parseInt(token[1]);
     }
+    
+    public Object [][] returnRows(ArrayList<Libro> lista){
+	Collections.sort(lista, sortCarnetStudent);
+	Object [][] registros = new Object[lista.size()][6];
+	for (int i = 0; i < lista.size(); i++) {
+	    registros[i][0]=lista.get(i).getCodigo();
+	    registros[i][1]=lista.get(i).getTitulo();
+	    registros[i][2]=lista.get(i).getAutor();
+	    registros[i][3]=lista.get(i).getCantidadDeCopias();
+	    registros[i][4]=lista.get(i).getFechaDePublicacion();
+	    registros[i][5]=lista.get(i).getEditorial();
+	}
+	return registros;
+    }
+    
+    public static Comparator<Libro> sortCarnetStudent= new Comparator<Libro>() {
+	public int compare(Libro book1, Libro book2) {
+	   String codigo1 = book1.getCodigo().toUpperCase();
+	   String codigo2 = book2.getCodigo().toUpperCase();
+	   //Asendiente
+	   return codigo1.compareTo(codigo2);
+	}};
     
 }

@@ -7,6 +7,7 @@ package com.backend;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Comparator;
 
 import javax.swing.JTextArea;
 
@@ -166,26 +167,35 @@ public class Estudiante implements Serializable{
         	return Integer.parseInt(token[1]);
     }
     
-    public boolean isCarrera (String instruccion,JTextArea cajaDeTexto, int posicion) {
-    	String token []= instruccion.split(":");
-    	boolean result = false;
-    	try {
-			if (token[0].equals("CARRERA")) {
-				int codCarrera= Integer.parseInt(token[1]);
-				if(codCarrera>=1 &&codCarrera<=5)
-					result = true;
-				else
-					cajaDeTexto.append("Error en la l�nea "+posicion+" el codigo no era un valor entre 1 y 5\n "+ instruccion +"\n\n");
-			}else 
-				result =false;
-		} catch (NumberFormatException e) {
-			cajaDeTexto.append("Error en la l�nea "+posicion+", codigo de carrera no aceptado\n "+ instruccion +"\n\n");
-		}
-    	return result;
-    }
+        public boolean isCarrera (String instruccion,JTextArea cajaDeTexto, int posicion) {
+        	String token []= instruccion.split(":");
+        	boolean result = false;
+        	try {
+    			if (token[0].equals("CARRERA")) {
+    				int codCarrera= Integer.parseInt(token[1]);
+    				if(codCarrera>=1 &&codCarrera<=5)
+    					result = true;
+    				else
+    					cajaDeTexto.append("Error en la l�nea "+posicion+" el codigo no era un valor entre 1 y 5\n "+ instruccion +"\n\n");
+    			}else 
+    				result =false;
+    		} catch (NumberFormatException e) {
+    			cajaDeTexto.append("Error en la l�nea "+posicion+", codigo de carrera no aceptado\n "+ instruccion +"\n\n");
+    		}
+        	return result;
+        }
     
-    public int leerCarrera(String instruccion) {
-    	String token[]=instruccion.split(":");
-    	return Integer.parseInt(token[1]);
-    }
+        public int leerCarrera(String instruccion) {
+        	String token[]=instruccion.split(":");
+        	return Integer.parseInt(token[1]);
+        }
+	
+	public static Comparator<Estudiante> sortCarnetStudent= new Comparator<Estudiante>() {
+	public int compare(Estudiante s1, Estudiante s2) {
+	   String carnet1 = s1.getNombre().toUpperCase();
+	   String carnet2 = s2.getNombre().toUpperCase();
+	   //Asendiente
+	   return carnet1.compareTo(carnet2);
+	}};
+	
 }
