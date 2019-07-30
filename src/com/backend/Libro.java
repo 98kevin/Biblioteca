@@ -8,6 +8,8 @@ package com.backend;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.swing.JTextArea;
+
 
 /**
  *
@@ -83,6 +85,8 @@ public class Libro implements Serializable{
            this(codigo,autor,titulo,cantidadDeCopias,null,"");
     }
     
+    public Libro() {}
+    
     
     /**
      * Constructor creado para el formulario de nuevos libros, y escritura en archivos binarios
@@ -101,8 +105,7 @@ public class Libro implements Serializable{
            this.cantidadDeCopias=cantidadDeCopias;
            this.fechaDePublicacion=fechaDePublicacion;
            this.editorial= editorial;
-           Archivo.actualizarContador(PATH_COUNT);
-          Archivo.escribirArchivoBinario(getPathOfFile(codigo), this);
+           Archivo.escribirArchivoBinario(getPathOfFile(codigo), this);
     }
 
     /**
@@ -110,7 +113,7 @@ public class Libro implements Serializable{
      * @param codigo El codigo del libro
      * @return Una direccion relativa donde se guardara el libro
      */
-    private String getPathOfFile(String codigo){
+    public static String getPathOfFile(String codigo){
         return "Libros/"+codigo+".book";
     }
 
@@ -125,4 +128,87 @@ public class Libro implements Serializable{
         libro.setCantidadDeCopias(libro.getCantidadDeCopias()+cantidadDeNuevasCopias);
         Archivo.escribirArchivoBinario(getPathOfFile(codigo), libro);
     }
+    
+    public boolean isTitulo(String instruccion, JTextArea cajaDeTexto, int posicion) {
+    	String token [] = instruccion.split(":");
+    	if (token[0].equals("TITULO")) {
+			return true;
+		}else {
+			cajaDeTexto.append("Error en la linea "+posicion+", no se pudo leer la sintaxis\n "+ instruccion +"\n\n");
+			return false;
+		}
+    }
+    
+    public String leerTitulo(String instruccion) {
+    	String token[]=instruccion.split(":");
+    	return token[1];
+    }
+    
+    public boolean isAutor(String instruccion, JTextArea cajaDeTexto, int posicion) {
+    	String token [] = instruccion.split(":");
+    	if (token[0].equals("AUTOR")) {
+			return true;
+    	}
+		else {
+			cajaDeTexto.append("Error en la linea "+posicion+", no se pudo leer la sintaxis\n "+ instruccion +"\n\n");
+			return false;
+		}
+    }
+    
+    public String leerAutor(String instruccion) {
+    	String token[]=instruccion.split(":");
+    	return token[1];
+    }
+    
+    public boolean isCodigo(String instruccion, JTextArea cajaDeTexto, int posicion) {
+    	String token [] = instruccion.split(":");
+    	boolean result = false;
+    	try {
+			if (token[0].equals("CODIGO")||token[0].equals("CODIGOLIBRO")) { //que sea una instruccion de codigo 
+				String tokensCodigo[]=token[1].split("-"); //la dividimos en dos
+				if (tokensCodigo[0].length()==3 & tokensCodigo[1].length()==3) { // evaluamos que tengan la longitud adecuada
+					int number =Integer.parseInt(tokensCodigo[0]);
+					result =true;
+				}else {
+					cajaDeTexto.append("Error en la linea "+posicion + " por longitud en el codigo del libro\n "+ instruccion +"\n\n");
+				}
+			}else {
+				cajaDeTexto.append("Error en la linea "+posicion + ", no se entiende el tipo de instruccion\n "+ instruccion +"\n\n");
+			}
+		} catch (NumberFormatException e) {
+			cajaDeTexto.append("Error en la linea "+posicion+", no cuenta con un codigo adecuado de libro\n "+ instruccion +"\n\n");
+		}
+    	return result;
+    }
+    
+    public String leerCodigo(String instruccion) {
+    	String token[]=instruccion.split(":");
+    	return token[1];
+    }
+    
+    public boolean isCantidad(String instruccion, JTextArea cajaDeTexto, int posicion) {
+    	String token [] = instruccion.split(":");
+    	boolean result = false;
+    	try {
+    		if (token[0].equals("CANTIDAD")) {
+    			int cantidad=Integer.parseInt(token[1]);
+    			if (cantidad>=0) {
+					result =true;
+				}else {
+					cajaDeTexto.append("Erro en la linea "+ posicion+", no es un numero intero positivo\n "+ instruccion +"\n\n");
+				}
+    		}else {
+				cajaDeTexto.append("Error en la linea "+ posicion +", no se entiende el tipo de instruccion\n "+ instruccion +"\n\n");
+			}
+		} catch (NumberFormatException e) {
+			cajaDeTexto.append("Error en la linea "+posicion+", no se puede leer la cantidad\n "+ instruccion +"\n\n");
+		}
+    	return result;
+    } 
+    
+    public int leerCantidad(String instruccion) {
+    	String token[]=instruccion.split(":");
+    	return Integer.parseInt(token[1]);
+    }
+    
 }

@@ -8,6 +8,8 @@ package com.backend;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.swing.JTextArea;
+
 /**
  *
  * @author kevin
@@ -23,7 +25,7 @@ public class Estudiante implements Serializable{
     private Date fechaDeNacimiento;
     private int cantidadDeLibrosEnPrestamo;
 
-     public final String PATH_COUNT="Contadores/ContadorDeEstudiantes.cnt";
+    public final String PATH_COUNT="Contadores/ContadorDeEstudiantes.cnt";
     public final int INGENIERIA=1;
     public final int MEDICINA=2;
     public final int DERECHO=3;
@@ -78,6 +80,11 @@ public class Estudiante implements Serializable{
         this.cantidadDeLibrosEnPrestamo = cantidadDeLibrosEnPrestamo;
     }
     
+    /**
+     * Crea un nuevo estudiante vacio. 
+     */
+    public Estudiante() {}
+    
     public Estudiante(int carnet, String nombre, int idCarrera){
         this(carnet,nombre,idCarrera,"",null);
     }
@@ -89,7 +96,6 @@ public class Estudiante implements Serializable{
         this.carrera = getNombreCarrera(idCarrera);
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.cantidadDeLibrosEnPrestamo = 0;
-        Archivo.actualizarContador(PATH_COUNT);
         Archivo.escribirArchivoBinario(getPathOfFile(carnet), this);
     }
     
@@ -98,20 +104,88 @@ public class Estudiante implements Serializable{
                 case INGENIERIA:
                     return "Ingenieria";
                 case MEDICINA:
-                    return "Medicina";
+                    return "Ingenieria";
                 case DERECHO:
-                    return "Derecho";
+                    return "Ingenieria";
                 case ARQUITECTURA:
-                    return "Arquitectura";
+                    return "Ingenieria";
                 case ADMINISTRACION:
-                    return "Administracion";
+                    return "Ingenieria";
                 default:
                     return null;
             }
     }
     
-    private String getPathOfFile(int carnet){
+    public static  String getPathOfFile(int carnet){
         return "Estudiantes/"+String.valueOf(carnet)+".std";
-    }    
-            
+    }
+    
+    /**
+     * Validacion de la instruccion de nombre para estudiante
+     * @param instruccion La instruccion que se est� manejando 
+     * @param cajaDeTexto La caja de texto de impresion de errores
+     * @param posicion La cantidad de l�neas que se han evaluado
+     * @return un booleano que indica si la instruccion es valida
+     */
+    public boolean isNombre(String instruccion,JTextArea cajaDeTexto, int posicion) {
+    	String token[]=instruccion.split(":");
+    	if(token[0].equals("NOMBRE")) {
+    		return true;
+    	}
+    	else {
+    		cajaDeTexto.append("Error al evaluar nombre en la linea "+posicion+", error de sintaxis. \n "+instruccion +"\n\n");
+    		return false;
+    	}
+    }
+    
+    public String leerNombre(String instruccion) {
+    	String token[]=instruccion.split(":");
+    	return token[1];
+    }
+    
+    public boolean isCarnet(String instruccion,JTextArea cajaDeTexto, int posicion) {
+    	String token[]=instruccion.split(":");
+    	boolean result=false;
+    	try {
+        	if(token[0].equals("CARNET")&&token[1].length()==9) {
+        		Integer.parseInt(token[1]);
+        		result = true;
+        	}	
+        	else {
+        		cajaDeTexto.append("Error al evaluar carnet en la linea "+posicion+", error de sintaxis. \n "+ instruccion +"\n\n");
+        		result= false;
+        	}
+		} catch (NumberFormatException e) {
+			cajaDeTexto.append("Error en la l�nea "+posicion+", por formato de numero del carnet \n "+ instruccion +"\n\n");
+		}
+		return result;
+    }
+    
+    public int leerCarnet(String instruccion) {
+        	String token[]=instruccion.split(":");
+        	return Integer.parseInt(token[1]);
+    }
+    
+    public boolean isCarrera (String instruccion,JTextArea cajaDeTexto, int posicion) {
+    	String token []= instruccion.split(":");
+    	boolean result = false;
+    	try {
+			if (token[0].equals("CARRERA")) {
+				int codCarrera= Integer.parseInt(token[1]);
+				if(codCarrera>=1 &&codCarrera<=5)
+					result = true;
+				else
+					cajaDeTexto.append("Error en la l�nea "+posicion+" el codigo no era un valor entre 1 y 5\n "+ instruccion +"\n\n");
+			}else 
+				result =false;
+		} catch (NumberFormatException e) {
+			cajaDeTexto.append("Error en la l�nea "+posicion+", codigo de carrera no aceptado\n "+ instruccion +"\n\n");
+		}
+    	return result;
+    }
+    
+    public int leerCarrera(String instruccion) {
+    	String token[]=instruccion.split(":");
+    	return Integer.parseInt(token[1]);
+    }
 }

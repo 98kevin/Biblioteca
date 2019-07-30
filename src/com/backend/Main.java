@@ -5,25 +5,20 @@
  */
 package com.backend;
 
-import com.frontend.Principal;
+import com.test.FormArchivoDeEntrada;
 
-
-//import com.frontend.Biblioteca_Cunoc;
-//import com.frontend.Principal;
-//import javax.swing.JOptionPane;
 /**
  *
  * @author kevin
  */
 public class Main {
     public static void main(String [] args){
-        
-        new Principal().setVisible(true);;
-        
-        Archivo.createDirectory("Contadores");
         Archivo.createDirectory("Estudiantes");
         Archivo.createDirectory("Libros");
         Archivo.createDirectory("Prestamos");
+        new FormArchivoDeEntrada();
     }
+    
+    
     
 }
