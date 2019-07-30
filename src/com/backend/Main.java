@@ -5,7 +5,7 @@
  */
 package com.backend;
 
-import com.test.FormArchivoDeEntrada;
+import com.frontend.Principal;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Main {
         Archivo.createDirectory("Estudiantes");
         Archivo.createDirectory("Libros");
         Archivo.createDirectory("Prestamos");
-        new FormArchivoDeEntrada();
+        new Principal().setVisible(true);
     }
     
     

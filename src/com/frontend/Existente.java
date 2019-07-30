@@ -99,6 +99,9 @@ public class Existente extends javax.swing.JFrame {
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarActionPerformed(evt);
+                ArchivoDeEntrada ar = new ArchivoDeEntrada();
+                String path= ar.seleccionarArchivo();
+                ar= new ArchivoDeEntrada(jTextArea1, path);
             }
         });
         getContentPane().add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 150, 40));
