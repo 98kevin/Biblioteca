@@ -7,6 +7,7 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ArchivoDeEntrada extends JFrame{
@@ -15,19 +16,27 @@ public class ArchivoDeEntrada extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int numLinea=0;
+	private JTextArea cajaDeTexto;
+	private String instruccion;
+	private Scanner lector;
 	
-	public ArchivoDeEntrada () {
-		leerArchivo(seleccionarArchivo());
+	public ArchivoDeEntrada (JTextArea cajaDeTexto,String path) {
+		this.cajaDeTexto=cajaDeTexto;
+		leerArchivo(path);
 	}
 	
-	
+	public ArchivoDeEntrada () {}
+	/**
+	 * Metodo utilizado para analizar el archivo de entrada. 
+	 * @param path La direccion del archivo que se desea leer
+	 */
 	public void leerArchivo(String path) {	
-		Scanner lector = null;
 		File file=null;
 		try {
 			file= new File(path);
 			lector= new Scanner(file);
-			analizarTipoInstruccion(lector);
+			analizarTipoInstruccion(); 
 		} catch (FileNotFoundException | NullPointerException e) {
 			//no se muestra nada, si no se selecciona un archivo
 		} finally {
@@ -39,112 +48,105 @@ public class ArchivoDeEntrada extends JFrame{
 		}
 	}
 	
-	private void analizarTipoInstruccion(Scanner lector) {
+	private void analizarTipoInstruccion() {
 		while(lector.hasNextLine()) {
 			String cabecera =lector.nextLine();
-			if(cabecera.startsWith("ESTUDIANTE")) {
-				analizarEstudiante(lector);
+			if(cabecera.contains("ESTUDIANTE")) {
+				instruccionEstudiante();
 			}
-			if(cabecera.startsWith("LIBRO")) {
-				analizarLibro(lector);
+			if(cabecera.contains("LIBRO")) {
+				instruccionLibro();
 			}
 					
-			if(cabecera.startsWith("PRESTAMO")) {
-				analizarPrestamo(lector);
+			if(cabecera.contains("PRESTAMO")) {
+				instruccionPrestamo();
 			}	
+		numLinea++;
 		}
 		JOptionPane.showMessageDialog(null, "Archivo de entrada ingresado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	private void analizarEstudiante(Scanner lector) {
+	private void instruccionEstudiante() {
+		Estudiante st =new Estudiante();
 		int carnet = 0;
 		String nombre = null;
 		int carrera = 0;
-		int indice=0;
-		String instruccion[]=new String [3];
-		for (int i = 0; i < instruccion.length; i++) {
-			instruccion[i]=lector.nextLine();
-			if(!instruccionFundamental(instruccion[i],lector)){
-				String token[] =instruccion[i].split(":");
-				if(i==0&&token[0].contains("CARNET"))
-					carnet=Integer.parseInt(token[1].replace(" ", ""));  //quitamos espacios si los ubiera antes de los numeros
-				if(i==1&&token[0].contains("NOMBRE"))
-					nombre=token[1];
-				if(i==2&&token[0].contains("CARRERA"))
-					carrera=Integer.parseInt(token[1].replace(" ", "")); 	
+		instruccion=siguienteInstruccion(lector);
+		if (st.isCarnet(instruccion, cajaDeTexto, numLinea)) {
+			carnet=st.leerCarnet(instruccion);
+			instruccion=siguienteInstruccion(lector);
+			if (st.isNombre(instruccion, cajaDeTexto, numLinea)) {
+				nombre=st.leerNombre(instruccion);
+				instruccion=siguienteInstruccion(lector);
+				if (st.isCarrera(instruccion, cajaDeTexto, numLinea)) {
+					carrera=st.leerCarrera(instruccion);
+					new Estudiante(carnet,nombre,carrera);
+				}
 			}
-		}
-		new Estudiante(carnet,nombre,carrera);
+		}	
 	}
 	
-	private void analizarLibro(Scanner lector) {
+	private String siguienteInstruccion(Scanner lector) {
+		instruccion=lector.nextLine();
+		numLinea++;
+		return instruccion;
+	}
+
+	private void instruccionLibro() {
+		Libro libro = new Libro();
 		String titulo=null;
 		String autor=null;
 		String codigo=null;
 		int cantidad=0;
-		String instruccion[]=new String [4];
-		for (int i = 0; i < instruccion.length; i++) {
-			instruccion[i]=lector.nextLine();
-			if(!instruccionFundamental(instruccion[i],lector)){
-				String token[] =instruccion[i].split(":");
-				if(i==0&&token[0].contains("CARNET"))
-					titulo=token[1];
-				if(i==1&&token[0].contains("AUTOR"))
-					autor=token[1];
-				if(i==2&&token[0].contains("CODIGO"))
-					codigo=token[1];
-				if(i==3&&token[0].contains("CANTIDAD"))
-					cantidad=Integer.parseInt(token[1].replace(" ", ""));  //quitamos espacios innecesarios
+		instruccion = siguienteInstruccion(lector);
+		if(libro.isTitulo(instruccion, cajaDeTexto, numLinea)) {
+			titulo=libro.leerTitulo(instruccion);
+			instruccion = siguienteInstruccion(lector);
+			if (libro.isAutor(instruccion, cajaDeTexto, numLinea)) {
+				autor=libro.leerAutor(instruccion);
+				instruccion = siguienteInstruccion(lector);
+				if (libro.isCodigo(instruccion, cajaDeTexto, numLinea)) {
+					codigo=libro.leerCodigo(instruccion);
+					instruccion = siguienteInstruccion(lector);
+					if (libro.isCantidad(instruccion, cajaDeTexto, numLinea)) {
+						cantidad=libro.leerCantidad(instruccion);
+						new Libro(codigo,autor,titulo,cantidad);
+					}
+				}
 			}
 		}
-		new Libro(codigo,autor,titulo,cantidad);
 	}
 	
-	private void analizarPrestamo(Scanner lector) {
+	private void instruccionPrestamo() {
+		Prestamo p = new Prestamo();
+		Libro l= new Libro();
+		Estudiante e = new Estudiante();
 		String codigoLibro=null;
 		int carnet = 0;
 		Date fecha=null;
-		String instruccion[]=new String [3];
-		for (int i = 0; i < instruccion.length; i++) {
-			instruccion[i]=lector.nextLine();
-			if(!instruccionFundamental(instruccion[i],lector)){
-				String token[] =instruccion[i].split(":");
-				if(i==0&&token[0].contains("CODIGOLIBRO"))
-					codigoLibro=token[1];
-				if(i==1&&token[0].contains("CANTIDAD"))
-					carnet=Integer.parseInt(token[1].replace(" ", ""));
-				if(i==2&&token[0].contains("CANTIDAD"))
-					fecha=leerFecha(token[1]);
+		instruccion = siguienteInstruccion(lector);
+		if (l.isCodigo(instruccion, cajaDeTexto, numLinea)) {
+			codigoLibro=l.leerCodigo(instruccion);
+			instruccion = siguienteInstruccion(lector);
+			if (e.isCarnet(instruccion, cajaDeTexto, numLinea)) {
+				carnet=e.leerCarnet(instruccion);
+				instruccion = siguienteInstruccion(lector);
+				if (p.isFecha(instruccion, cajaDeTexto, numLinea)) {
+					fecha=p.leerFecha(instruccion);
+					if(p.validacionDePrestamo(carnet, codigoLibro)) // si el prestamo es valido procede a ingresarlo
+					    new Prestamo(codigoLibro, carnet, fecha);
+				}
 			}
-		}
-		new Prestamo(codigoLibro, carnet, fecha);
+		}	
 	}
 	
+	@SuppressWarnings("deprecation")
 	private Date leerFecha(String string) {
 		String parte[]=string.split("-");
 		int anio =Integer.parseInt(parte[0]);
 		int mes =Integer.parseInt(parte[1]);
 		int dia =Integer.parseInt(parte[2]);
 		return new Date(anio,mes,dia);
-	}
-
-
-	private boolean instruccionFundamental(String instruccion,Scanner lector) {
-		if(instruccion.startsWith("ESTUDIANTE")) {
-			
-			return true;
-		}if(instruccion.startsWith("LIBRO")) {
-			
-			return true;
-		}
-		if(instruccion.startsWith("PRESTAMO")) {
-			
-			return true;
-		}	
-		else {
-			return false;
-		}
-			
 	}
 
 	public String seleccionarArchivo() {
@@ -159,7 +161,4 @@ public class ArchivoDeEntrada extends JFrame{
 	    	 return null;
 	}
 	
-	private void analizarInstruccion() {
-		
-	}
 }

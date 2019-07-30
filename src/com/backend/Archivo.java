@@ -72,14 +72,14 @@ public  class Archivo implements Serializable{
    * @param pathOfFile Direccion del archivo que se va a actualizar
    */
     public static void actualizarContador(String pathOfFile){
-                Integer count = (Integer)Archivo.leerArchivo(pathOfFile);
-                int contador;
-                if(count == null){
-                    contador=0;
-                }else{
-                    contador = count ++;
-                }
-              Archivo.escribirArchivoBinario(pathOfFile, contador);
+        Integer count = (Integer)Archivo.leerArchivo(pathOfFile);
+        int contador;
+        if(count == null){
+            contador=0;
+        }else{
+            contador = count ++;
+        }
+        Archivo.escribirArchivoBinario(pathOfFile, contador);
     }
     
     public static File readFile(String path){
