@@ -5,6 +5,11 @@
  */
 package com.frontend;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.backend.Estudiante;
+
 /**
  *
  * @author luedu
@@ -29,21 +34,22 @@ public class RegistroEstudiante extends javax.swing.JFrame {
     private void initComponents() {
 
         jlNickname = new javax.swing.JLabel();
-        JTF1 = new javax.swing.JTextField();
+        cajaNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        JTF2 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        JTF3 = new javax.swing.JTextField();
+        cajaCarrera = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        JTF5 = new javax.swing.JTextField();
-        JTF6 = new javax.swing.JTextField();
-        JTF4 = new javax.swing.JTextField();
+        cajaDia = new javax.swing.JTextField();
+        cajaMes = new javax.swing.JTextField();
+        cajaAnio = new javax.swing.JTextField();
         Back = new javax.swing.JButton();
-        jButtonRegistro = new javax.swing.JButton();
-        jButtonSave = new javax.swing.JButton();
-        M_2 = new javax.swing.JTextField();
+        botonGuardar = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelFont = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cajaCarnet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -54,31 +60,23 @@ public class RegistroEstudiante extends javax.swing.JFrame {
         jlNickname.setForeground(new java.awt.Color(51, 255, 51));
         jlNickname.setText("Nombre:");
         jlNickname.setAutoscrolls(true);
-        getContentPane().add(jlNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
-
-        JTF1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        JTF1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JTF1.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jlNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        
+        cajaNombre.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cajaNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cajaNombre.setName("cajaNombre"); // NOI18N
+        cajaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTF1ActionPerformed(evt);
             }
         });
-        getContentPane().add(JTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 400, 30));
+        getContentPane().add(cajaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 400, 30));
 
         jLabel7.setBackground(new java.awt.Color(102, 255, 102));
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 255, 0));
         jLabel7.setText("Carnet:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 190, -1));
-
-        JTF2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        JTF2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JTF2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTF2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(JTF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 400, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 80, -1));
 
         jLabel8.setBackground(new java.awt.Color(102, 255, 102));
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
@@ -86,14 +84,15 @@ public class RegistroEstudiante extends javax.swing.JFrame {
         jLabel8.setText("ID Carrera:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 220, -1));
 
-        JTF3.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        JTF3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JTF3.addActionListener(new java.awt.event.ActionListener() {
+        cajaCarrera.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cajaCarrera.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cajaCarrera.setName("cajaCarrera"); // NOI18N
+        cajaCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTF3ActionPerformed(evt);
             }
         });
-        getContentPane().add(JTF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 400, 30));
+        getContentPane().add(cajaCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 400, 30));
 
         jLabel4.setBackground(new java.awt.Color(102, 255, 102));
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
@@ -101,70 +100,61 @@ public class RegistroEstudiante extends javax.swing.JFrame {
         jLabel4.setText("Fecha de Nacimiento:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 280, -1));
 
-        JTF5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        JTF5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JTF5.addActionListener(new java.awt.event.ActionListener() {
+        cajaDia.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cajaDia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cajaDia.setName("cajaDia"); // NOI18N
+        cajaDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTF5ActionPerformed(evt);
             }
         });
-        getContentPane().add(JTF5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 50, 30));
+        getContentPane().add(cajaDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 50, 30));
 
-        JTF6.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        JTF6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JTF6.addActionListener(new java.awt.event.ActionListener() {
+        cajaMes.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cajaMes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cajaMes.setName("cajaMes"); // NOI18N
+        cajaMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTF6ActionPerformed(evt);
             }
         });
-        getContentPane().add(JTF6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 140, 30));
+        getContentPane().add(cajaMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 490, 90, 30));
 
-        JTF4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        JTF4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JTF4.addActionListener(new java.awt.event.ActionListener() {
+        cajaAnio.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cajaAnio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cajaAnio.setName("cajaAnio"); // NOI18N
+        cajaAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTF4ActionPerformed(evt);
             }
         });
-        getContentPane().add(JTF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, 80, 30));
+        getContentPane().add(cajaAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 490, 120, 30));
 
         Back.setBackground(new java.awt.Color(102, 255, 102));
         Back.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         Back.setForeground(new java.awt.Color(255, 0, 51));
         Back.setText("Back");
         Back.setActionCommand("Ver Reportes");
+        Back.setName("botonRegresar"); // NOI18N
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
             }
         });
-        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 90, -1));
+        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 90, -1));
 
-        jButtonRegistro.setBackground(new java.awt.Color(102, 255, 102));
-        jButtonRegistro.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jButtonRegistro.setForeground(new java.awt.Color(255, 0, 0));
-        jButtonRegistro.setText("Registro");
-        jButtonRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegistroActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 170, -1));
-
-        jButtonSave.setBackground(new java.awt.Color(102, 255, 102));
-        jButtonSave.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jButtonSave.setForeground(new java.awt.Color(255, 0, 51));
-        jButtonSave.setText("Guardar");
-        jButtonSave.setActionCommand("Ver Reportes");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardar.setBackground(new java.awt.Color(102, 255, 102));
+        botonGuardar.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        botonGuardar.setForeground(new java.awt.Color(255, 0, 51));
+        botonGuardar.setText("Guardar");
+        botonGuardar.setActionCommand("Ver Reportes");
+        botonGuardar.setName("botonGuardar"); // NOI18N
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 570, -1, -1));
-
-        M_2.setFont(new java.awt.Font("Dubai", 3, 18)); // NOI18N
-        getContentPane().add(M_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 40, -1));
+        getContentPane().add(botonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 570, -1, -1));
 
         jLabelTitulo.setBackground(new java.awt.Color(102, 255, 102));
         jLabelTitulo.setFont(new java.awt.Font("Arial Black", 0, 30)); // NOI18N
@@ -176,16 +166,24 @@ public class RegistroEstudiante extends javax.swing.JFrame {
         jLabelFont.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/libros (2).jpg"))); // NOI18N
         getContentPane().add(jLabelFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
 
-        pack();
+        jLabel1.setText("dia");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
+
+        jLabel2.setText("mes");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, -1, -1));
+
+        jLabel3.setText("año");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 470, -1, -1));
+
+        cajaCarnet = new JTextField();
+        cajaCarnet.setBounds(249, 167, 114, 21);
+	getContentPane().add(cajaCarnet);
+	cajaCarnet.setColumns(10);
     }// </editor-fold>//GEN-END:initComponents
 
     private void JTF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTF1ActionPerformed
-
-    private void JTF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTF2ActionPerformed
 
     private void JTF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTF3ActionPerformed
         // TODO add your handling code here:
@@ -208,18 +206,22 @@ public class RegistroEstudiante extends javax.swing.JFrame {
         new Registro().setVisible(true);
     }//GEN-LAST:event_BackActionPerformed
 
-    private void jButtonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistroActionPerformed
-        this.setVisible(false);
-       // new Estadisticas().setVisible(true);
-
-        // new Reportes().setVisible(true);
-    }//GEN-LAST:event_jButtonRegistroActionPerformed
-
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-       // cont++;
-        this.setVisible(false);
-       
+       if (tieneCamposLlenos(cajaCarnet, cajaNombre, cajaCarrera)) {
+	   Estudiante st = new Estudiante();
+	   st.ingresarDatos(cajaCarnet, cajaNombre, cajaCarrera, cajaDia, cajaMes, cajaAnio);
+       }else {
+	JOptionPane.showMessageDialog(null, "Falta datos por ingresar", "Campos obligatorios faltantes", JOptionPane.INFORMATION_MESSAGE);
+    }
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private boolean tieneCamposLlenos(JTextField campo1, JTextField campo2, JTextField campo3) {
+	return (campo1.getText()!="" & campo2.getText()!="" & campo3.getText()!="");
+    }
+    
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,20 +260,21 @@ public class RegistroEstudiante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    public static javax.swing.JTextField JTF1;
-    public static javax.swing.JTextField JTF2;
-    public static javax.swing.JTextField JTF3;
-    public static javax.swing.JTextField JTF4;
-    public static javax.swing.JTextField JTF5;
-    public static javax.swing.JTextField JTF6;
-    public static javax.swing.JTextField M_2;
-    private javax.swing.JButton jButtonRegistro;
-    private javax.swing.JButton jButtonSave;
+    public static javax.swing.JTextField cajaNombre;
+    public static javax.swing.JTextField cajaCarrera;
+    public static javax.swing.JTextField cajaAnio;
+    public static javax.swing.JTextField cajaDia;
+    public static javax.swing.JTextField cajaMes;
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelFont;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JTextField cajaCarnet;
     private javax.swing.JLabel jlNickname;
     // End of variables declaration//GEN-END:variables
 }

@@ -164,18 +164,18 @@ public class Prestamo implements Serializable{
     	String token [] = instruccion.split(":");
     	boolean result = false;
     	try {
-			if (token[0].equals("FECHA")){
-				String datos []=token[1].split("-");
-				int anio=Integer.parseInt(datos[0]);
-				int mes=Integer.parseInt(datos[1]);
-				int dia=Integer.parseInt(datos[2]);
-				if (anio>2000 & anio<2050 &
-					mes >=0 & mes<=12&
-					dia>=0 & dia<=31) {
-					result =true;
-				}else {
-					cajaDeTexto.append("Error en la linea"+posicion+" rangos de fecha no validos\n "+ instruccion +"\n\n");
-				}
+    			if (token[0].equals("FECHA")){
+    				String datos []=token[1].split("-");
+    				int anio=Integer.parseInt(datos[0]);
+    				int mes=Integer.parseInt(datos[1]);
+    				int dia=Integer.parseInt(datos[2]);
+    				if (anio>2000 & anio<2050 &
+    					mes >=0 & mes<=12&
+    					dia>=0 & dia<=31) {
+    					result =true;
+    				}else {
+    					cajaDeTexto.append("Error en la linea"+posicion+" rangos de fecha no validos\n "+ instruccion +"\n\n");
+    				}
 			}else {
 				cajaDeTexto.append("Error en la linea"+posicion+" no se entinde el tipo de instruccion\n "+ instruccion +"\n\n");
 			}
@@ -185,13 +185,25 @@ public class Prestamo implements Serializable{
     	return result;
     }
     
-    public Date leerFecha(String instruccion) {
+    public Date leerFechaDeInstruccion(String instruccion) {
     	String token[]=instruccion.split(":");
     	String datos [] = token[1].split("-");
-    	int anio=Integer.parseInt(datos[0]);
-    	int mes=Integer.parseInt(datos[1]);
-		int dia=Integer.parseInt(datos[2]);
-    	return new Date(anio-1900,mes,dia);
+    	Date fecha = leerFecha(datos[0], datos[1], datos[2]);
+    	return fecha;
+    }
+    
+    public Date leerFecha(String textoAanio, String textoMes, String textoDia) {
+	int anio=0;
+	int mes=0;
+	int dia=0;
+	try {
+	    anio = Integer.parseInt(textoAanio)-1900;
+	    mes = Integer.parseInt(textoMes)-1;
+	    dia = Integer.parseInt(textoDia);
+	} catch (NumberFormatException  e) {
+	    JOptionPane.showMessageDialog(null, "Formatos de numeros incorrectos, verifique la fecha o la cantidad","Error de tipo de datos", JOptionPane.ERROR_MESSAGE);
+	}
+	return new Date(anio,mes,dia);
     }
     
 }

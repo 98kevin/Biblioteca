@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 /**
@@ -109,6 +111,17 @@ public class Libro implements Serializable{
            this.fechaDePublicacion=fechaDePublicacion;
            this.editorial= editorial;
            Archivo.escribirArchivoBinario(getPathOfFile(codigo), this);
+    }
+    
+    public void ingresarDatos (JTextField cajaCodigoLibro, JTextField cajaAutor, JTextField cajaTitulo, JTextField cajaCopias,JTextField cajaAnio,JTextField cajaMes,
+	JTextField cajaDia, JTextField cajaEditorial) {
+	Prestamo p = new Prestamo();
+	Date fecha = p.leerFecha(cajaAnio.getText(), cajaMes.getText(), cajaDia.getText());
+	try {
+	    new Libro(cajaCodigoLibro.getText(),cajaAutor.getText(), cajaTitulo.getText(), Integer.parseInt(cajaCopias.getText()),fecha,cajaEditorial.getText());
+	} catch (NumberFormatException e) {
+	    JOptionPane.showConfirmDialog(null, "Error la cantidad de copias", "Error ", JOptionPane.ERROR_MESSAGE);
+	}
     }
 
     /**

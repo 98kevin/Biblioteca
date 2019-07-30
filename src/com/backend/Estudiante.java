@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Comparator;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -87,10 +89,10 @@ public class Estudiante implements Serializable{
     public Estudiante() {}
     
     public Estudiante(int carnet, String nombre, int idCarrera){
-        this(carnet,nombre,idCarrera,"",null);
+        this(carnet,nombre,idCarrera,null);
     }
     
-    public Estudiante(int carnet, String nombre, int idCarrera, String carrera, Date fechaDeNacimiento) {
+    public Estudiante(int carnet, String nombre, int idCarrera, Date fechaDeNacimiento) {
         this.carnet = carnet;
         this.nombre = nombre;
         this.idCarrera = idCarrera;
@@ -185,6 +187,17 @@ public class Estudiante implements Serializable{
         	return result;
         }
     
+        public void ingresarDatos(JTextField cajaCarnet, JTextField cajaNombre, JTextField cajaCarrera, JTextField cajaDia,JTextField cajaMes,JTextField cajaAnio) {
+            Prestamo p = new Prestamo();
+            Date fecha=p.leerFecha(cajaAnio.getText(), cajaMes.getName(), cajaDia.getText());
+            try {
+        	new Estudiante(Integer.parseInt(cajaCarnet.getText()),cajaNombre.getText(), Integer.parseInt(cajaCarrera.getText()),fecha);
+        	JOptionPane.showConfirmDialog(null, "Ingreso con exito", "Registro aceptado ", JOptionPane.INFORMATION_MESSAGE);
+	    } catch (NumberFormatException e) {
+		  JOptionPane.showConfirmDialog(null, "Tipos de datos invalidos, revise el carnet o el codigo de  carrera", "Error ", JOptionPane.ERROR_MESSAGE);
+	    }
+        }
+        
         public int leerCarrera(String instruccion) {
         	String token[]=instruccion.split(":");
         	return Integer.parseInt(token[1]);

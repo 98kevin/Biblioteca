@@ -75,7 +75,7 @@ public class Registro extends javax.swing.JFrame {
 
     private void BLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLibroActionPerformed
         this.setVisible(false);
-        new RegistroLibro().setVisible(true);
+        new RegistroDeNuevosLibros().setVisible(true);
 
         /*
         Registro principa2 = new Registro();

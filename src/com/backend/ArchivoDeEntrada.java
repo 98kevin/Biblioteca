@@ -132,7 +132,7 @@ public class ArchivoDeEntrada extends JFrame{
 				carnet=e.leerCarnet(instruccion);
 				instruccion = siguienteInstruccion(lector);
 				if (p.isFecha(instruccion, cajaDeTexto, numLinea)) {
-					fecha=p.leerFecha(instruccion);
+					fecha=p.leerFechaDeInstruccion(instruccion);
 					if(p.validacionDePrestamo(carnet, codigoLibro)) // si el prestamo es valido procede a ingresarlo
 					    new Prestamo(codigoLibro, carnet, fecha);
 				}
