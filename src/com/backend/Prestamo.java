@@ -121,7 +121,7 @@ public class Prestamo implements Serializable{
      * @param fecha La fecha inicial del prestamo
      */
     public Prestamo(String codigoLibro, int carnet, Date fecha) {
-	actualizarDatos(codigoLibro, carnet,INGRESO);
+	actualizarDatos(codigoLibro, carnet,INGRESO); //actualiza los archivos segun sus cantidades
         this.codigoLibro = codigoLibro;
         this.carnet = carnet;
         this.fecha = (fecha==null)?getFechaActual():fecha;

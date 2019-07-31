@@ -71,7 +71,7 @@ public class RegistroDeNuevosLibros extends JFrame {
 	contentPane.add(tablaDeLibros);
 	
 	JScrollPane scrollPane = new JScrollPane();
-	scrollPane.setBounds(22, 178, 871, 278);
+	scrollPane.setBounds(22, 137, 871, 278);
 	contentPane.add(scrollPane);
 	
 	table_1 = new JTable();
@@ -84,5 +84,14 @@ public class RegistroDeNuevosLibros extends JFrame {
 	JButton btnEditarCopias = new JButton("Editar Copias");
 	btnEditarCopias.setBounds(762, 56, 131, 59);
 	contentPane.add(btnEditarCopias);
+	
+	JButton btnAceptar = new JButton("Aceptar");
+	btnAceptar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    setVisible(false);
+		}
+	});
+	btnAceptar.setBounds(762, 427, 105, 27);
+	contentPane.add(btnAceptar);
     }
 }
