@@ -1,24 +1,32 @@
 package com.frontend;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import com.backend.Prestamo;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.backend.ReadFiles;
 
 public class VentanaReportes extends JFrame {
 	
 	
 	private JPanel contentPane;
+	private JTable tabla;
+	ReadFiles<Prestamo> archivos;
+	ArrayList<Prestamo> prestamos;
 
 	/**
 	 * Launch the application.
@@ -49,12 +57,30 @@ public class VentanaReportes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(284, 99, 777, 418);
+		contentPane.add(scrollPane);
+		
+		tabla = new JTable();
+		scrollPane.setViewportView(tabla);
+		
 		JButton botonEntregaHoy = new JButton("Entrega Hoy");
 		botonEntregaHoy.setBounds(43, 99, 179, 41);
 		botonEntregaHoy.setForeground(new Color(255, 255, 255));
 		botonEntregaHoy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			new RegistroEstudiantes().setVisible(true);
+			    archivos = new ReadFiles<Prestamo>(new Prestamo());
+			    prestamos= archivos.getFiles("Prestamos/");
+			    ArrayList<Prestamo> entregaHoy= new ArrayList<Prestamo>();
+			    for (int i = 0; i < prestamos.size(); i++) {
+				System.out.println(prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha()));
+				if (prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha())==4) {
+				    entregaHoy.add(prestamos.get(i));
+				}
+			    }
+			    Object [][] filas = new Prestamo().getRows(entregaHoy);
+			    String columnas []= {"Codigo Libro","Carnet del Estudiante","Fecha de inicio del prestamo"};
+			    tabla.setModel(new DefaultTableModel(filas,columnas));
 			}
 		});
 		contentPane.setLayout(null);
@@ -90,6 +116,12 @@ public class VentanaReportes extends JFrame {
 		contentPane.add(botonRecaudacion);
 		
 		JButton botonBack = new JButton("Back");
+		botonBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    setVisible(false);
+			    new Bienvenida().setVisible(true);
+			}
+		});
 		botonBack.setBounds(43, 476, 179, 41);
 		botonBack.setForeground(new Color(255, 255, 255));
 		botonBack.setBackground(new Color(0, 0, 0));
@@ -125,8 +157,6 @@ public class VentanaReportes extends JFrame {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(284, 99, 777, 418);
-		contentPane.add(scrollPane);
+		
 	}
 }
