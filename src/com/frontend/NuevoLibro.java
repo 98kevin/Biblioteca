@@ -28,7 +28,7 @@ public class NuevoLibro extends JFrame {
     private JTextField titulo;
     private JTextField cajaDia;
     private JTextField cajaMes;
-    private JTextField cajaAño;
+    private JTextField cajaAnio;
     private JTextField autor;
     private JTextField codigoLibro;
     private JTextField copias;
@@ -100,10 +100,10 @@ public class NuevoLibro extends JFrame {
 	contentPane.add(cajaMes);
 	cajaMes.setColumns(10);
 	
-	cajaAño = new JTextField();
-	cajaAño.setBounds(381, 359, 100, 21);
-	contentPane.add(cajaAño);
-	cajaAño.setColumns(10);
+	cajaAnio = new JTextField();
+	cajaAnio.setBounds(381, 359, 100, 21);
+	contentPane.add(cajaAnio);
+	cajaAnio.setColumns(10);
 	
 	JButton botonAceptar = new JButton("Aceptar");
 	/*botonAceptar.addActionListener(new ActionListener() {
