@@ -176,7 +176,7 @@ public class Prestamo implements Serializable{
     }
     
     private String getPathOfFile(Prestamo p){
-        return "Prestamos/"+p.getCarnet()+"-"+p.getCodigoLibro()+"-"+p.getFecha()+".ptm";
+        return "Prestamos/"+p.getCarnet()+"-"+p.getCodigoLibro()+".ptm";
     }
     
     public boolean isFecha(String instruccion, JTextArea cajaDeTexto, int posicion){
