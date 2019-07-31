@@ -1,4 +1,4 @@
-kage com.frontend;
+package com.frontend;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -53,14 +53,14 @@ public class RegistroDeNuevosLibros extends JFrame {
 	contentPane.setLayout(null);
 	
 	JLabel lblRegistroDeNuevos = new JLabel("Registro de Nuevos Libros");
-	lblRegistroDeNuevos.setBounds(153, 0, 188, 17);
+	lblRegistroDeNuevos.setBounds(364, 12, 188, 17);
 	contentPane.add(lblRegistroDeNuevos);
 	
 	JButton btnNuevo = new JButton("Nuevo");
 	btnNuevo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
-		    new RegistroLibro().setVisible(true);;
+		    
 		}
 	});
 	btnNuevo.setBounds(633, 56, 105, 59);

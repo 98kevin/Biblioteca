@@ -60,7 +60,7 @@ public class EstudiantesActuales extends JFrame {
 	JButton botonNuevo = new JButton("Nuevo");
 	botonNuevo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-		    new IngresoNuevosEstudiantes().setVisible(true);
+		    new LibrosActuales().setVisible(true);
 		}
 	});
 	botonNuevo.setBounds(686, 72, 105, 27);
@@ -83,7 +83,6 @@ public class EstudiantesActuales extends JFrame {
 	botonAceptar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
-		    new Registro().setVisible(true);
 		}
 	});
 	botonAceptar.setBounds(686, 487, 105, 27);

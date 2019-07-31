@@ -5,6 +5,7 @@
  */
 package com.backend;
 
+import com.frontend.Bienvenida;
 import com.frontend.Principal;
 
 /**
@@ -16,7 +17,7 @@ public class Main {
         Archivo.createDirectory("Estudiantes");
         Archivo.createDirectory("Libros");
         Archivo.createDirectory("Prestamos");
-        new Principal().setVisible(true);
+        new Bienvenida().setVisible(true);
     }
     
     

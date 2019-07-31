@@ -78,7 +78,7 @@ public class Bienvenida extends JFrame {
 		JButton botonReportes = new JButton("Reportes");
 		botonReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new VentanaPrestamos().setVisible(true);
+				new VentanaReportes().setVisible(true);
 			}
 		});
 		botonReportes.setBounds(71, 311, 179, 41);

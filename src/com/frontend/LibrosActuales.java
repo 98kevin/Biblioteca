@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class IngresoNuevosEstudiantes extends JFrame {
+public class LibrosActuales extends JFrame {
 
     /**
      * 
@@ -36,7 +36,7 @@ public class IngresoNuevosEstudiantes extends JFrame {
 	EventQueue.invokeLater(new Runnable() {
 	    public void run() {
 		try {
-		    IngresoNuevosEstudiantes frame = new IngresoNuevosEstudiantes();
+		    LibrosActuales frame = new LibrosActuales();
 		    frame.setVisible(true);
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -48,7 +48,7 @@ public class IngresoNuevosEstudiantes extends JFrame {
     /**
      * Create the frame.
      */
-    public IngresoNuevosEstudiantes() {
+    public LibrosActuales() {
     	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 797, 570);
@@ -126,6 +126,7 @@ public class IngresoNuevosEstudiantes extends JFrame {
 	JButton botonCancelar = new JButton("Cancelar");
 	botonCancelar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+		    new EstudiantesActuales().setVisible(true);
 		    setVisible(false);
 		}
 	});
@@ -139,7 +140,7 @@ public class IngresoNuevosEstudiantes extends JFrame {
 			   Estudiante st = new Estudiante();
 			   st.ingresarDatos(cajaCarnet, cajaNombre, cajaCarrera, cajaDia, cajaMes, cajaAnio);
 			   setVisible(false);
-			   new Registro().setVisible(true);
+			   new EstudiantesActuales().setVisible(true);
 		       }else {
 			JOptionPane.showMessageDialog(null, "Falta datos por ingresar", "Campos obligatorios faltantes", JOptionPane.INFORMATION_MESSAGE);
 		    }

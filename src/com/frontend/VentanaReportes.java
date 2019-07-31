@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 
-public class VentanaPrestamos extends JFrame {
+public class VentanaReportes extends JFrame {
 	
 	
 	private JPanel contentPane;
@@ -27,7 +27,7 @@ public class VentanaPrestamos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrestamos frame = new VentanaPrestamos();
+					VentanaReportes frame = new VentanaReportes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class VentanaPrestamos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaPrestamos() {
+	public VentanaReportes() {
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

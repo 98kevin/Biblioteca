@@ -1,9 +1,4 @@
-/*
- * T
-o change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.backend;
 
 import java.io.File;
@@ -21,6 +16,11 @@ import javax.swing.JTextArea;
 public class Prestamo implements Serializable{
     
     private final static long serialVersionUID=1002L;
+    private static final int DIAS_SIN_MORA = 1;
+    private static final int PRECIO_MORA = 10;
+    private static final int PRECIO_NORMAL = 5;
+    private final int INGRESO=1;
+    private final int EGRESO=-1;
     
     private String codigoLibro;
     private int carnet;
@@ -121,10 +121,23 @@ public class Prestamo implements Serializable{
      * @param fecha La fecha inicial del prestamo
      */
     public Prestamo(String codigoLibro, int carnet, Date fecha) {
+	actualizarDatos(codigoLibro, carnet,INGRESO);
         this.codigoLibro = codigoLibro;
         this.carnet = carnet;
         this.fecha = (fecha==null)?getFechaActual():fecha;
         Archivo.escribirArchivoBinario(getPathOfFile(this), this);
+        this.cancelado=false;
+    }
+    
+    public void actualizarDatos(String codigoLibro, int carnet,int tipoDeOperacion) {
+	String pathEstudiante="Estudiantes/"+carnet+".std";
+	String pathLibro="Libros/"+codigoLibro+".book";
+	Estudiante std = (Estudiante) Archivo.leerArchivo(pathEstudiante);
+	std.setCantidadDeLibrosEnPrestamo(std.getCantidadDeLibrosEnPrestamo()+(tipoDeOperacion)); //ingreso suma valores, egreso los resta
+	Archivo.escribirArchivoBinario(pathEstudiante, std);
+	Libro book = (Libro) Archivo.leerArchivo(pathLibro);
+	book.setCantidadDeCopias(book.getCantidadDeCopias()-(tipoDeOperacion)); //ingreso resta valores, egreso los suma
+	Archivo.escribirArchivoBinario(pathLibro, book);
     }
     
     /**
@@ -139,21 +152,27 @@ public class Prestamo implements Serializable{
         String pathBook=Libro.getPathOfFile(codigoLibro);
         Libro book = (Libro) Archivo.leerArchivo(pathBook);
         if (new File(pathStudent).exists() & new File(pathBook).exists()) { //Si existe el libro y existe el estudiante se procede analizar el prestamo
-            if(student.getCantidadDeLibrosEnPrestamo() >=3 || book.getCantidadDeCopias()<=0)
-        	result=false;
-	}else {
-	    JOptionPane.showMessageDialog(null, "No existe el libro o estudiante para efectuar el prestamo", "Error", JOptionPane.INFORMATION_MESSAGE);
-	}
+            	if(book.getCantidadDeCopias()<=0) { 
+        		result=false;
+        		JOptionPane.showMessageDialog(null, "No hay copias suficientes", "Error", JOptionPane.INFORMATION_MESSAGE);
+    		}
+            	if(student.getCantidadDeLibrosEnPrestamo() >=3) {
+            	    	result=false;
+            	    	JOptionPane.showMessageDialog(null, "Limite de libros alcanzado por el estudiante", "Error", JOptionPane.INFORMATION_MESSAGE);
+            	}
+    	}
+    	if(!(new File(pathStudent).exists() )|| !(new File(pathBook).exists())) {
+    	    result=false;	
+    	    JOptionPane.showMessageDialog(null, "No existe el libro o estudiante no registrado para efectuar el prestamo", "Error", JOptionPane.INFORMATION_MESSAGE);
+    	}
         return result;
     }
     
-    public int calcularDiasEnPrestamo(String codigoLibro, int carnet, Date fechaInicial){
-        Date fechaActual= new Date(Calendar.getInstance().getTimeInMillis());
-        boolean tieneDias=true;
-        while (!tieneDias) {
-            
-        }
-        return 1;
+    public int calcularDiasEnPrestamo(Date fechaInicial){
+        	Date fechaActual= new Date(Calendar.getInstance().getTimeInMillis());
+        	int diaInicial= (int) (fechaInicial.getTime())/86400000;
+        	int diaFinal = (int) (fechaActual.getTime())/86400000;
+        	return (diaFinal - diaInicial)+1;
     }
     
     private String getPathOfFile(Prestamo p){
@@ -204,6 +223,20 @@ public class Prestamo implements Serializable{
 	    JOptionPane.showMessageDialog(null, "Formatos de numeros incorrectos, verifique la fecha","Error de tipo de datos", JOptionPane.ERROR_MESSAGE);
 	}
 	return new Date(anio,mes,dia);
+    }
+    
+    public double [] getCosto(int dias) {
+	double costo[]= new double[2]; //dos casillas una para el costo normal y otra para la mora
+	if(dias>4) {
+	    int diasDeMora = dias - 3 - DIAS_SIN_MORA;  //si lo entrega en el cuarto dia no se cobra mora 
+	    dias=3;
+	    costo[0]=dias*PRECIO_NORMAL;
+	    costo[1]=dias*PRECIO_MORA;
+	}else {
+	    costo[0]=dias*PRECIO_NORMAL;
+	    costo[1]=0;
+	}
+	return costo;
     }
     
 }
