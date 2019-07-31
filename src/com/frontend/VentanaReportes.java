@@ -94,7 +94,18 @@ public class VentanaReportes extends JFrame {
 		botonEnMora.setForeground(new Color(255, 255, 255));
 		botonEnMora.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RegistroLibros().setVisible(true);
+			    archivos = new ReadFiles<Prestamo>(new Prestamo());
+			    prestamos= archivos.getFiles("Prestamos/");
+			    ArrayList<Prestamo> enMora= new ArrayList<Prestamo>();
+			    for (int i = 0; i < prestamos.size(); i++) {
+				System.out.println(prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha()));
+				if (prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha())>4) {
+				    enMora.add(prestamos.get(i));
+				}
+			    }
+			    Object [][] filas = new Prestamo().getRows(enMora);
+			    String columnas []= {"Codigo Libro","Carnet del Estudiante","Fecha de inicio del prestamo"};
+			    tabla.setModel(new DefaultTableModel(filas,columnas));
 			}
 		});
 		botonEnMora.setBackground(new Color(0, 0, 0));
