@@ -105,23 +105,6 @@ public class NuevoLibro extends JFrame {
 	contentPane.add(cajaAnio);
 	cajaAnio.setColumns(10);
 	
-	JButton botonAceptar = new JButton("Aceptar");
-	/*botonAceptar.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		       if (tieneCamposLlenos(titulo, cajaNombre, cajaCarrera)) {
-			   Estudiante st = new Estudiante();
-			   st.ingresarDatos(titulo, cajaNombre, cajaCarrera, cajaDia, cajaMes, cajaA�o);
-			   setVisible(false);
-			   new Registro().setVisible(true);
-		       }else {
-			JOptionPane.showMessageDialog(null, "Falta datos por ingresar", "Campos obligatorios faltantes", JOptionPane.INFORMATION_MESSAGE);
-		    }
-		       setVisible(false);
-		}
-	});
-	botonAceptar.setBounds(344, 466, 112, 38);
-	contentPane.add(botonAceptar);*/
-	
 	JLabel lblAutor = new JLabel("Autor: ");
 	lblAutor.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	lblAutor.setBounds(55, 172, 126, 26);
@@ -167,14 +150,30 @@ public class NuevoLibro extends JFrame {
 	editorial.setBounds(195, 310, 286, 26);
 	contentPane.add(editorial);
 	
-	JButton button = new JButton("Aceptar");
-	button.setFont(new Font("Tahoma", Font.PLAIN, 18));
-	button.setBounds(353, 459, 102, 45);
-	contentPane.add(button);
+	JButton botonAceptar1 = new JButton("Aceptar");
+	botonAceptar1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			/*if (tieneCamposLlenos(titulo, autor, libro)) {
+				   Estudiante st = new Estudiante();
+				   st.ingresarDatos(cajaCarnet, cajaNombre, cajaCarrera, cajaDia, cajaMes, cajaAnio);
+				   setVisible(false);
+				   new RegistroEstudiantes().setVisible(true);
+			       }else {
+				JOptionPane.showMessageDialog(null, "Falta datos por ingresar", "Campos obligatorios faltantes", JOptionPane.INFORMATION_MESSAGE);
+			    }
+			       setVisible(false);*/
+		}
+		
+	});
+	botonAceptar1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	botonAceptar1.setBounds(353, 459, 102, 45);
+	contentPane.add(botonAceptar1);
 	
 	JButton botonCancelar = new JButton("Cancelar");
 	botonCancelar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+		    new RegistroLibros().setVisible(true);
 		}
 	});
 	botonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 18));

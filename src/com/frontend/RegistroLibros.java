@@ -17,6 +17,8 @@ import com.backend.Libro;
 import com.backend.ReadFiles;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
 
 public class RegistroLibros extends JFrame {
 
@@ -48,15 +50,18 @@ public class RegistroLibros extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 913, 504);
 	contentPane = new JPanel();
+	contentPane.setBackground(new Color(135, 206, 235));
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 	
 	JLabel lblRegistroDeNuevos = new JLabel("Registro de Nuevos Libros");
-	lblRegistroDeNuevos.setBounds(364, 12, 188, 17);
+	lblRegistroDeNuevos.setFont(new Font("Tahoma", Font.BOLD, 20));
+	lblRegistroDeNuevos.setBounds(314, 28, 279, 55);
 	contentPane.add(lblRegistroDeNuevos);
 	
 	JButton btnNuevo = new JButton("Nuevo");
+	btnNuevo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	btnNuevo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
@@ -64,7 +69,7 @@ public class RegistroLibros extends JFrame {
 		    
 		}
 	});
-	btnNuevo.setBounds(633, 56, 105, 59);
+	btnNuevo.setBounds(658, 56, 80, 37);
 	contentPane.add(btnNuevo);
 	
 	tablaDeLibros = new JTable();
@@ -83,13 +88,20 @@ public class RegistroLibros extends JFrame {
 	table_1.setModel( new DefaultTableModel(filas, columnas));
 	scrollPane.setViewportView(table_1);
 	JButton btnEditarCopias = new JButton("Editar Copias");
-	btnEditarCopias.setBounds(762, 56, 131, 59);
+	btnEditarCopias.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
+	btnEditarCopias.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	btnEditarCopias.setBounds(748, 56, 119, 37);
 	contentPane.add(btnEditarCopias);
 	
 	JButton btnAceptar = new JButton("Aceptar");
+	btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	btnAceptar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
+		    new Bienvenida().setVisible(true);
 		}
 	});
 	btnAceptar.setBounds(762, 427, 105, 27);
