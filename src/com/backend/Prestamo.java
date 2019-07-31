@@ -108,7 +108,7 @@ public class Prestamo implements Serializable{
      * Devuleve la fecha actual
      * @return Una fecha del paquete sql.date
      */
-    private Date getFechaActual(){
+    public Date getFechaActual(){
         Calendar tiempoEnMillis = Calendar.getInstance();
         Date fechaActual = new Date(tiempoEnMillis.getTimeInMillis());
         return fechaActual;
@@ -176,7 +176,7 @@ public class Prestamo implements Serializable{
     }
     
     private String getPathOfFile(Prestamo p){
-        return "Prestamos/"+p.getCarnet()+"-"+p.getCodigoLibro()+"-"+p.getFecha()+".ptm";
+        return "Prestamos/"+p.getCarnet()+"-"+p.getCodigoLibro()+".ptm";
     }
     
     public boolean isFecha(String instruccion, JTextArea cajaDeTexto, int posicion){
