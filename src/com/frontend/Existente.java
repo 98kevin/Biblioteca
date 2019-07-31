@@ -154,7 +154,7 @@ public class Existente extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        this.setVisible (false);
-       new Prestamo().setVisible(true);
+       new Bienvenida().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

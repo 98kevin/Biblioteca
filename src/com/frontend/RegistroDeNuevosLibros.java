@@ -1,4 +1,4 @@
-package com.frontend;
+kage com.frontend;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -44,6 +44,7 @@ public class RegistroDeNuevosLibros extends JFrame {
      * Create the frame.
      */
     public RegistroDeNuevosLibros() {
+    	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 913, 504);
 	contentPane = new JPanel();
