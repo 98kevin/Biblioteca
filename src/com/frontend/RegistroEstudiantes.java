@@ -58,8 +58,8 @@ public class RegistroEstudiantes extends JFrame {
 	contentPane.setLayout(null);
 	
 	JLabel lblEstudiantesRegistrados = new JLabel("Estudiantes Registrados");
-	lblEstudiantesRegistrados.setFont(new Font("Tahoma", Font.BOLD, 20));
-	lblEstudiantesRegistrados.setBounds(277, 37, 298, 27);
+	lblEstudiantesRegistrados.setFont(new Font("Tahoma", Font.BOLD, 22));
+	lblEstudiantesRegistrados.setBounds(268, 45, 307, 41);
 	contentPane.add(lblEstudiantesRegistrados);
 	
 	JButton botonNuevo = new JButton("Nuevo");

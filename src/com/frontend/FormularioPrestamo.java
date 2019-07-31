@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import com.backend.Archivo;
 import com.backend.Libro;
 import com.backend.Prestamo;
+import java.awt.Color;
 
 public class FormularioPrestamo extends JFrame {
 
@@ -55,6 +56,7 @@ public class FormularioPrestamo extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 580);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -88,16 +90,17 @@ public class FormularioPrestamo extends JFrame {
 			   }
 			}
 		});
-		btnCalcular.setBounds(441, 167, 124, 26);
+		btnCalcular.setBounds(474, 166, 91, 26);
 		contentPane.add(btnCalcular);
 		
 		botonRegresar = new JButton("Back");
+		botonRegresar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		botonRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    	setVisible(false);
 			}
 		});
-		botonRegresar.setBounds(29, 470, 102, 45);
+		botonRegresar.setBounds(29, 470, 75, 42);
 		contentPane.add(botonRegresar);
 		
 		label = new JLabel("Carnet:");
@@ -107,12 +110,12 @@ public class FormularioPrestamo extends JFrame {
 		
 		cajaCarnet = new JTextField();
 		cajaCarnet.setColumns(10);
-		cajaCarnet.setBounds(204, 110, 206, 27);
+		cajaCarnet.setBounds(204, 110, 230, 27);
 		contentPane.add(cajaCarnet);
 		
 		cajaCodigoLibro = new JTextField();
 		cajaCodigoLibro.setColumns(10);
-		cajaCodigoLibro.setBounds(204, 167, 206, 25);
+		cajaCodigoLibro.setBounds(204, 167, 230, 25);
 		contentPane.add(cajaCodigoLibro);
 		
 		label_3 = new JLabel("Codigo Libro:");
