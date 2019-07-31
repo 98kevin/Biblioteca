@@ -228,7 +228,7 @@ public class Libro implements Serializable{
     }
     
     public Object [][] returnRows(ArrayList<Libro> lista){
-	Collections.sort(lista, sortCarnetStudent);
+	Collections.sort(lista, sortCodigoLibro);
 	Object [][] registros = new Object[lista.size()][6];
 	for (int i = 0; i < lista.size(); i++) {
 	    registros[i][0]=lista.get(i).getCodigo();
@@ -241,7 +241,7 @@ public class Libro implements Serializable{
 	return registros;
     }
     
-    public static Comparator<Libro> sortCarnetStudent= new Comparator<Libro>() {
+    public static Comparator<Libro> sortCodigoLibro= new Comparator<Libro>() {
 	public int compare(Libro book1, Libro book2) {
 	   String codigo1 = book1.getCodigo().toUpperCase();
 	   String codigo2 = book2.getCodigo().toUpperCase();

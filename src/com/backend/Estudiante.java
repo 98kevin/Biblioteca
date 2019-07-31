@@ -7,8 +7,11 @@ package com.backend;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -28,7 +31,6 @@ public class Estudiante implements Serializable{
     private Date fechaDeNacimiento;
     private int cantidadDeLibrosEnPrestamo;
 
-    public final String PATH_COUNT="Contadores/ContadorDeEstudiantes.cnt";
     public final int INGENIERIA=1;
     public final int MEDICINA=2;
     public final int DERECHO=3;
@@ -60,7 +62,7 @@ public class Estudiante implements Serializable{
     }
 
     public String getCarrera() {
-        return carrera;
+        return this.carrera;
     }
 
     public void setCarrera(String carrera) {
@@ -96,7 +98,7 @@ public class Estudiante implements Serializable{
         this.carnet = carnet;
         this.nombre = nombre;
         this.idCarrera = idCarrera;
-        this.carrera = getNombreCarrera(idCarrera);
+        this.carrera = getNombreCarrera(this.idCarrera);
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.cantidadDeLibrosEnPrestamo = 0;
         Archivo.escribirArchivoBinario(getPathOfFile(carnet), this);
@@ -107,13 +109,13 @@ public class Estudiante implements Serializable{
                 case INGENIERIA:
                     return "Ingenieria";
                 case MEDICINA:
-                    return "Ingenieria";
+                    return "Medicina";
                 case DERECHO:
-                    return "Ingenieria";
+                    return "Derecho";
                 case ARQUITECTURA:
-                    return "Ingenieria";
+                    return "Arquitectura";
                 case ADMINISTRACION:
-                    return "Ingenieria";
+                    return "Administracion";
                 default:
                     return null;
             }
@@ -187,12 +189,11 @@ public class Estudiante implements Serializable{
         	return result;
         }
     
-        public void ingresarDatos(JTextField cajaCarnet, JTextField cajaNombre, JTextField cajaCarrera, JTextField cajaDia,JTextField cajaMes,JTextField cajaAnio) {
+        public void ingresarDatos(JTextField cajaCarnet, JTextField cajaNombre, JComboBox<String> cajaCarrera, JTextField cajaDia,JTextField cajaMes,JTextField cajaAnio) {
             Prestamo p = new Prestamo();
-            Date fecha=p.leerFecha(cajaAnio.getText(), cajaMes.getName(), cajaDia.getText());
+            Date fecha=p.leerFecha(cajaAnio.getText(), cajaMes.getText(), cajaDia.getText());
             try {
-        	new Estudiante(Integer.parseInt(cajaCarnet.getText()),cajaNombre.getText(), Integer.parseInt(cajaCarrera.getText()),fecha);
-        	JOptionPane.showConfirmDialog(null, "Ingreso con exito", "Registro aceptado ", JOptionPane.INFORMATION_MESSAGE);
+        	new Estudiante(Integer.parseInt(cajaCarnet.getText()),cajaNombre.getText(), cajaCarrera.getSelectedIndex()+1,fecha);
 	    } catch (NumberFormatException e) {
 		  JOptionPane.showConfirmDialog(null, "Tipos de datos invalidos, revise el carnet o el codigo de  carrera", "Error ", JOptionPane.ERROR_MESSAGE);
 	    }
@@ -210,5 +211,19 @@ public class Estudiante implements Serializable{
 	   //Asendiente
 	   return carnet1.compareTo(carnet2);
 	}};
+	
+	    public Object [][] returnRows(ArrayList<Estudiante> lista){
+		Collections.sort(lista, sortCarnetStudent);
+		Object [][] registros = new Object[lista.size()][6];
+		for (int i = 0; i < lista.size(); i++) {
+		    registros[i][0]=lista.get(i).getCarnet();
+		    registros[i][1]=lista.get(i).getNombre();
+		    registros[i][2]=lista.get(i).getIdCarrera();
+		    registros[i][3]=lista.get(i).getCarrera();
+		    registros[i][4]=lista.get(i).getFechaDeNacimiento();
+		    registros[i][5]=lista.get(i).getCantidadDeLibrosEnPrestamo();
+		}
+		return registros;
+	    }
 	
 }

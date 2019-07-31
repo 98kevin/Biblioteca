@@ -192,16 +192,16 @@ public class Prestamo implements Serializable{
     	return fecha;
     }
     
-    public Date leerFecha(String textoAanio, String textoMes, String textoDia) {
+    public Date leerFecha(String textoAnio, String textoMes, String textoDia) {
 	int anio=0;
 	int mes=0;
 	int dia=0;
 	try {
-	    anio = Integer.parseInt(textoAanio)-1900;
+	    anio = Integer.parseInt(textoAnio)-1900;
 	    mes = Integer.parseInt(textoMes)-1;
 	    dia = Integer.parseInt(textoDia);
 	} catch (NumberFormatException  e) {
-	    JOptionPane.showMessageDialog(null, "Formatos de numeros incorrectos, verifique la fecha o la cantidad","Error de tipo de datos", JOptionPane.ERROR_MESSAGE);
+	    JOptionPane.showMessageDialog(null, "Formatos de numeros incorrectos, verifique la fecha","Error de tipo de datos", JOptionPane.ERROR_MESSAGE);
 	}
 	return new Date(anio,mes,dia);
     }
