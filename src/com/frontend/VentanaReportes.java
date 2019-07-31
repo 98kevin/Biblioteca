@@ -54,7 +54,7 @@ public class VentanaReportes extends JFrame {
 		botonEntregaHoy.setForeground(new Color(255, 255, 255));
 		botonEntregaHoy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			new EstudiantesActuales().setVisible(true);
+			new RegistroEstudiantes().setVisible(true);
 			}
 		});
 		contentPane.setLayout(null);
@@ -68,7 +68,7 @@ public class VentanaReportes extends JFrame {
 		botonEnMora.setForeground(new Color(255, 255, 255));
 		botonEnMora.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RegistroDeNuevosLibros().setVisible(true);
+				new RegistroLibros().setVisible(true);
 			}
 		});
 		botonEnMora.setBackground(new Color(0, 0, 0));

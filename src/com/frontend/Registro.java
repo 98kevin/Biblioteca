@@ -75,7 +75,7 @@ public class Registro extends javax.swing.JFrame {
 
     private void BLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLibroActionPerformed
         this.setVisible(false);
-        new RegistroDeNuevosLibros().setVisible(true);
+        new RegistroLibros().setVisible(true);
         /*
         Registro principa2 = new Registro();
         principa2.show();
@@ -89,7 +89,7 @@ public class Registro extends javax.swing.JFrame {
 
     private void BEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEstudianteActionPerformed
         this.setVisible(false);
-        new EstudiantesActuales().setVisible(true);
+        new RegistroEstudiantes().setVisible(true);
     }//GEN-LAST:event_BEstudianteActionPerformed
 
     private void BBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBackActionPerformed

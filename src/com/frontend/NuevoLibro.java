@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 
-public class IngresoNuevosLibros extends JFrame {
+public class NuevoLibro extends JFrame {
 
     /**
      * 
@@ -41,7 +41,7 @@ public class IngresoNuevosLibros extends JFrame {
 	EventQueue.invokeLater(new Runnable() {
 	    public void run() {
 		try {
-		    IngresoNuevosLibros frame = new IngresoNuevosLibros();
+		    NuevoLibro frame = new NuevoLibro();
 		    frame.setVisible(true);
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -53,7 +53,7 @@ public class IngresoNuevosLibros extends JFrame {
     /**
      * Create the frame.
      */
-    public IngresoNuevosLibros() {
+    public NuevoLibro() {
     	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 584, 570);

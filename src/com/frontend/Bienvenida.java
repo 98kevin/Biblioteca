@@ -55,7 +55,7 @@ public class Bienvenida extends JFrame {
 		botonAlumno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new EstudiantesActuales().setVisible(true);
+				new RegistroEstudiantes().setVisible(true);
 			}
 		});
 		contentPane.setLayout(null);
@@ -70,7 +70,7 @@ public class Bienvenida extends JFrame {
 		botonLibros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new RegistroDeNuevosLibros().setVisible(true);
+				new RegistroLibros().setVisible(true);
 			}
 		});
 		botonLibros.setBackground(new Color(0, 0, 0));

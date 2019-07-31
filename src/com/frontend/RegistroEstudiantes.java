@@ -23,7 +23,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 
 
-public class EstudiantesActuales extends JFrame {
+public class RegistroEstudiantes extends JFrame {
 
     private JPanel contentPane;
     private JTable table;
@@ -35,7 +35,7 @@ public class EstudiantesActuales extends JFrame {
 	EventQueue.invokeLater(new Runnable() {
 	    public void run() {
 		try {
-		    EstudiantesActuales frame = new EstudiantesActuales();
+		    RegistroEstudiantes frame = new RegistroEstudiantes();
 		    frame.setVisible(true);
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -47,7 +47,7 @@ public class EstudiantesActuales extends JFrame {
     /**
      * Create the frame.
      */
-    public EstudiantesActuales() {
+    public RegistroEstudiantes() {
     	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 851, 562);
@@ -67,7 +67,7 @@ public class EstudiantesActuales extends JFrame {
 	botonNuevo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
-			new LibrosActuales().setVisible(true);
+			new NuevoEstudiante().setVisible(true);
 		}
 	});
 	botonNuevo.setBounds(686, 72, 105, 27);

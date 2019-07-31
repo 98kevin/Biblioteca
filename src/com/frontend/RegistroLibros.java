@@ -18,7 +18,7 @@ import com.backend.ReadFiles;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class RegistroDeNuevosLibros extends JFrame {
+public class RegistroLibros extends JFrame {
 
     private JPanel contentPane;
     private JTable tablaDeLibros;
@@ -31,7 +31,7 @@ public class RegistroDeNuevosLibros extends JFrame {
 	EventQueue.invokeLater(new Runnable() {
 	    public void run() {
 		try {
-		    RegistroDeNuevosLibros frame = new RegistroDeNuevosLibros();
+		    RegistroLibros frame = new RegistroLibros();
 		    frame.setVisible(true);
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -43,7 +43,7 @@ public class RegistroDeNuevosLibros extends JFrame {
     /**
      * Create the frame.
      */
-    public RegistroDeNuevosLibros() {
+    public RegistroLibros() {
     	setResizable(false);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 913, 504);
