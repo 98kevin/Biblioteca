@@ -189,7 +189,7 @@ public class Prestamo implements Serializable{
         	Date fechaActual= new Date(Calendar.getInstance().getTimeInMillis());
         	int diaInicial= (int) (fechaInicial.getTime())/86400000;
         	int diaFinal = (int) (fechaActual.getTime())/86400000;
-        	return (diaFinal - diaInicial);
+        	return (diaFinal - diaInicial)+1;
     }
     
     private String getPathOfFile(Prestamo p){
@@ -265,9 +265,6 @@ public class Prestamo implements Serializable{
 	}
 	return registros;
     }
-<<<<<<< HEAD
-    
-=======
     public Object [][] getRowsRecord(ArrayList<Prestamo> lista){
 	Object [][] registros = new Object[lista.size()][5];
 	for (int i = 0; i < lista.size(); i++) {
@@ -280,5 +277,4 @@ public class Prestamo implements Serializable{
 	}
 	return registros;
     }
->>>>>>> Reportes
 }
