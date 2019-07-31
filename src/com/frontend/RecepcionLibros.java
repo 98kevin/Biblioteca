@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class RecepcicionLibros extends JFrame {
+public class RecepcionLibros extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -28,7 +28,7 @@ public class RecepcicionLibros extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RecepcicionLibros frame = new RecepcicionLibros();
+					RecepcionLibros frame = new RecepcionLibros();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,11 +40,12 @@ public class RecepcicionLibros extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RecepcicionLibros() {
+	public RecepcionLibros() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 580);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -56,7 +57,7 @@ public class RecepcicionLibros extends JFrame {
 		
 		JLabel lblCodigoLibro = new JLabel("Fecha Inicial:");
 		lblCodigoLibro.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblCodigoLibro.setBounds(21, 214, 124, 27);
+		lblCodigoLibro.setBounds(32, 214, 124, 27);
 		contentPane.add(lblCodigoLibro);
 		
 		JLabel lblCodigoLibro_2 = new JLabel("Codigo Libro:");
@@ -92,6 +93,8 @@ public class RecepcicionLibros extends JFrame {
 		contentPane.add(label);
 		
 		JLabel fechaInicial = new JLabel("");
+		fechaInicial.setBackground(new Color(255, 255, 255));
+		fechaInicial.setForeground(new Color(255, 255, 255));
 		fechaInicial.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		fechaInicial.setBounds(161, 214, 124, 27);
 		contentPane.add(fechaInicial);
@@ -102,7 +105,7 @@ public class RecepcicionLibros extends JFrame {
 		contentPane.add(lblFechaActual);
 		
 		JLabel fechaActual = new JLabel("");
-		fechaActual.setForeground(Color.WHITE);
+		fechaActual.setForeground(new Color(255, 255, 255));
 		fechaActual.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		fechaActual.setBounds(454, 214, 124, 27);
 		contentPane.add(fechaActual);
@@ -113,6 +116,7 @@ public class RecepcicionLibros extends JFrame {
 		contentPane.add(lblSubtotal);
 		
 		JLabel label_2 = new JLabel("");
+		label_2.setForeground(new Color(255, 255, 255));
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		label_2.setBounds(232, 282, 124, 27);
 		contentPane.add(label_2);
@@ -123,6 +127,7 @@ public class RecepcicionLibros extends JFrame {
 		contentPane.add(lblMora);
 		
 		JLabel label_4 = new JLabel("");
+		label_4.setForeground(new Color(255, 255, 255));
 		label_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		label_4.setBounds(232, 331, 124, 27);
 		contentPane.add(label_4);
@@ -133,6 +138,7 @@ public class RecepcicionLibros extends JFrame {
 		contentPane.add(lblTotal);
 		
 		JLabel label_6 = new JLabel("");
+		label_6.setForeground(new Color(255, 255, 255));
 		label_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		label_6.setBounds(232, 387, 124, 27);
 		contentPane.add(label_6);

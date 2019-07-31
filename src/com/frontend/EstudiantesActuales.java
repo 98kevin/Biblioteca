@@ -18,6 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import com.backend.Estudiante;
 import com.backend.Libro;
 import com.backend.ReadFiles;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 
 public class EstudiantesActuales extends JFrame {
@@ -49,18 +52,22 @@ public class EstudiantesActuales extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 851, 562);
 	contentPane = new JPanel();
+	contentPane.setBackground(new Color(135, 206, 235));
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 	
 	JLabel lblEstudiantesRegistrados = new JLabel("Estudiantes Registrados");
-	lblEstudiantesRegistrados.setBounds(315, 12, 162, 17);
+	lblEstudiantesRegistrados.setFont(new Font("Tahoma", Font.BOLD, 20));
+	lblEstudiantesRegistrados.setBounds(277, 37, 298, 27);
 	contentPane.add(lblEstudiantesRegistrados);
 	
 	JButton botonNuevo = new JButton("Nuevo");
+	botonNuevo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	botonNuevo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-		    new LibrosActuales().setVisible(true);
+		    setVisible(false);
+			new LibrosActuales().setVisible(true);
 		}
 	});
 	botonNuevo.setBounds(686, 72, 105, 27);
@@ -80,9 +87,11 @@ public class EstudiantesActuales extends JFrame {
 	table = new JTable(dtm);
 	scrollPane.setViewportView(table);
 	JButton botonAceptar = new JButton("Aceptar");
+	botonAceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	botonAceptar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
+		    new Bienvenida().setVisible(true);
 		}
 	});
 	botonAceptar.setBounds(686, 487, 105, 27);

@@ -54,7 +54,8 @@ public class Bienvenida extends JFrame {
 		botonAlumno.setForeground(new Color(255, 255, 255));
 		botonAlumno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			new EstudiantesActuales().setVisible(true);
+				setVisible(false);
+				new EstudiantesActuales().setVisible(true);
 			}
 		});
 		contentPane.setLayout(null);
@@ -68,6 +69,7 @@ public class Bienvenida extends JFrame {
 		botonLibros.setForeground(new Color(255, 255, 255));
 		botonLibros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				new RegistroDeNuevosLibros().setVisible(true);
 			}
 		});
@@ -78,6 +80,7 @@ public class Bienvenida extends JFrame {
 		JButton botonReportes = new JButton("Reportes");
 		botonReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				new VentanaReportes().setVisible(true);
 			}
 		});
@@ -90,7 +93,8 @@ public class Bienvenida extends JFrame {
 		JButton botonRecepcion = new JButton("Recepcion");
 		botonRecepcion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RecepcicionLibros().setVisible (true);
+				setVisible(false);
+				new RecepcionLibros().setVisible (true);
 			
 			}
 		});
@@ -115,6 +119,7 @@ public class Bienvenida extends JFrame {
 		JButton botonPrestamo = new JButton("Prestamos");
 		botonPrestamo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				new FormularioPrestamo().setVisible(true); 
 				
 			}
@@ -128,6 +133,7 @@ public class Bienvenida extends JFrame {
 		JButton botonArchivoDeEntrada = new JButton("Archivo de Entrada");
 		botonArchivoDeEntrada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				new Existente().setVisible(true);
 			}
 		});

@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Dimension;
 
 /**
  *
@@ -39,6 +40,7 @@ public class Existente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jInicio = new javax.swing.JButton();
+        jInicio.setMaximumSize(new Dimension(40, 9));
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -66,7 +68,7 @@ public class Existente extends javax.swing.JFrame {
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 370, 40));
 
         jInicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jInicio.setText("Inicio");
+        jInicio.setText("Ir");
         jInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jInicioActionPerformed(evt);
@@ -123,7 +125,7 @@ public class Existente extends javax.swing.JFrame {
 
     private void jInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInicioActionPerformed
         this.setVisible (false);
-        new Principal ().setVisible(true);
+        new Bienvenida ().setVisible(true);
     }//GEN-LAST:event_jInicioActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
