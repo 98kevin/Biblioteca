@@ -98,6 +98,7 @@ public class FormularioPrestamo extends JFrame {
 		botonRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    	setVisible(false);
+			    	new Bienvenida().setVisible(true);
 			}
 		});
 		botonRegresar.setBounds(29, 470, 75, 42);

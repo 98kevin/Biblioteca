@@ -137,6 +137,7 @@ public class RecepcionLibros extends JFrame {
 		contentPane.add(labelTotal);
 		
 		botonCalcular = new JButton("Calcular");
+		botonCalcular.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		botonCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    p = (Prestamo) Archivo.leerArchivo("Prestamos/"+cajaCarnet.getText()+"-"+cajaCodigoLibro.getText()+".ptm");			    
@@ -154,10 +155,18 @@ public class RecepcionLibros extends JFrame {
 		contentPane.add(botonCalcular);
 		
 		botonRegresar = new JButton("Back");
+		botonRegresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			    new Bienvenida().setVisible(true);
+			}
+		});
+		botonRegresar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		botonRegresar.setBounds(105, 466, 102, 45);
 		contentPane.add(botonRegresar);
 		
 		botonAceptar = new JButton("Pagar");
+		botonAceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    p.setTotal(costo[0]+costo[1]);
