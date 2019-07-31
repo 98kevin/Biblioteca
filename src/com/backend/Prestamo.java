@@ -21,13 +21,14 @@ public class Prestamo implements Serializable{
     private static final int DIAS_SIN_MORA = 1;
     private static final int PRECIO_MORA = 10;
     private static final int PRECIO_NORMAL = 5;
-    private final int INGRESO=1;
-    private final int EGRESO=-1;
+    public  static final int INGRESO=1;
+    public static final int EGRESO=-1;
     
     private String codigoLibro;
     private int carnet;
     private int idCarrera;
     private Date fecha;
+    private Date fechaDePago;
     private int diasEnMora;
     private double total;
     private double totalDeMora;
@@ -35,6 +36,20 @@ public class Prestamo implements Serializable{
 
     public String getCodigoLibro() {
         return codigoLibro;
+    }
+
+    /**
+     * @return the fechaDePago
+     */
+    public Date getFechaDePago() {
+        return fechaDePago;
+    }
+
+    /**
+     * @param fechaDePago the fechaDePago to set
+     */
+    public void setFechaDePago(Date fechaDePago) {
+        this.fechaDePago = fechaDePago;
     }
 
     public void setCodigoLibro(String codigoLibro) {
@@ -233,7 +248,7 @@ public class Prestamo implements Serializable{
 	    int diasDeMora = dias - 3 - DIAS_SIN_MORA;  //si lo entrega en el cuarto dia no se cobra mora 
 	    dias=3;
 	    costo[0]=dias*PRECIO_NORMAL;
-	    costo[1]=dias*PRECIO_MORA;
+	    costo[1]=diasDeMora*PRECIO_MORA;
 	}else {
 	    costo[0]=dias*PRECIO_NORMAL;
 	    costo[1]=0;
@@ -250,5 +265,16 @@ public class Prestamo implements Serializable{
 	}
 	return registros;
     }
-    
+    public Object [][] getRowsRecord(ArrayList<Prestamo> lista){
+	Object [][] registros = new Object[lista.size()][5];
+	for (int i = 0; i < lista.size(); i++) {
+	    registros[i][0]=lista.get(i).getCodigoLibro();
+	    registros[i][1]=lista.get(i).getCarnet();
+	    registros[i][2]=lista.get(i).getFecha();
+	    registros[i][3]=lista.get(i).getFechaDePago();
+	    registros[i][4]=lista.get(i).getTotal();
+	    
+	}
+	return registros;
+    }
 }

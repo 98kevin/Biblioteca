@@ -163,7 +163,9 @@ public class RecepcionLibros extends JFrame {
 			    p.setTotal(costo[0]+costo[1]);
 			    p.setTotalDeMora(costo[1]);
 			    p.setCancelado(true);
+			    p.setFechaDePago(p.getFechaActual());
 			    Archivo.escribirArchivoBinario("Prestamos/"+p.getCarnet()+"-"+p.getCodigoLibro()+".ptm", p);
+			    p.actualizarDatos(p.getCodigoLibro(), p.getCarnet(), Prestamo.EGRESO);
 			    JOptionPane.showMessageDialog(null, "Pagado");
 			}
 		});

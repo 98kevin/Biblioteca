@@ -3,6 +3,7 @@ package com.frontend;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +52,7 @@ public class VentanaReportes extends JFrame {
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1110, 575);
+		setBounds(100, 100, 1110, 641);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,7 +74,6 @@ public class VentanaReportes extends JFrame {
 			    prestamos= archivos.getFiles("Prestamos/");
 			    ArrayList<Prestamo> entregaHoy= new ArrayList<Prestamo>();
 			    for (int i = 0; i < prestamos.size(); i++) {
-				System.out.println(prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha()));
 				if (prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha())==4) {
 				    entregaHoy.add(prestamos.get(i));
 				}
@@ -98,7 +98,6 @@ public class VentanaReportes extends JFrame {
 			    prestamos= archivos.getFiles("Prestamos/");
 			    ArrayList<Prestamo> enMora= new ArrayList<Prestamo>();
 			    for (int i = 0; i < prestamos.size(); i++) {
-				System.out.println(prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha()));
 				if (prestamos.get(i).calcularDiasEnPrestamo(prestamos.get(i).getFecha())>4) {
 				    enMora.add(prestamos.get(i));
 				}
@@ -112,7 +111,50 @@ public class VentanaReportes extends JFrame {
 		botonEnMora.setFont(new Font("Tahoma", Font.BOLD, 15));
 		contentPane.add(botonEnMora);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(95, 524, 966, 69);
+		panel_1.setBackground(new Color(135, 206, 235));
+		contentPane.add(panel_1);
+		
 		JButton botonHistorial = new JButton("Historial");
+		botonHistorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    archivos = new ReadFiles<Prestamo>(new Prestamo());
+			    prestamos= archivos.getFiles("Prestamos/");
+			    ArrayList<Prestamo> prestamosPagados = new ArrayList<Prestamo>();
+			    double total=0;
+			    double subTotalDeMoras=0;
+			    double recaudacionNormal=0;
+			    for (int i = 0; i < prestamos.size(); i++) {
+				if (prestamos.get(i).isCancelado()) {
+				    prestamosPagados.add(prestamos.get(i));
+				    subTotalDeMoras=subTotalDeMoras+prestamos.get(i).getTotalDeMora();
+				    total=total+prestamos.get(i).getTotal();
+				}
+			    }
+			    recaudacionNormal=total-subTotalDeMoras;
+			    Object [][] filas = new Prestamo().getRowsRecord(prestamosPagados);
+			    String columnas []= {"Codigo Libro","Carnet del Estudiante","Fecha de inicio del prestamo","Fecha de entrega del libro", "Ingreso Netos"};
+			    tabla.setModel(new DefaultTableModel(filas,columnas));
+			    JLabel labelTotal = new JLabel("Total: ");
+			    JLabel labelNormal = new JLabel("Normal: ");
+			    JLabel labelMora = new JLabel("Mora: ");
+			    
+			    JLabel totalRecaudado= new JLabel(String.valueOf(total));
+			    JLabel recaudadoPrestamoNormal= new JLabel(String.valueOf(recaudacionNormal));
+			    JLabel recaudadoPrestamoMora= new JLabel(String.valueOf(subTotalDeMoras));
+			    
+			    panel_1.setLayout(new GridLayout(3, 2));
+			    panel_1.add(labelNormal);
+			    panel_1.add(recaudadoPrestamoNormal);
+			    panel_1.add(labelMora);
+			    panel_1.add(recaudadoPrestamoMora);
+			    panel_1.add(labelTotal);
+			    panel_1.add(totalRecaudado);
+			    panel_1.setVisible(true);
+			    
+			}
+		});
 		botonHistorial.setBounds(43, 349, 179, 41);
 		botonHistorial.setForeground(new Color(255, 255, 255));
 		botonHistorial.setBackground(new Color(0, 0, 0));
@@ -133,7 +175,7 @@ public class VentanaReportes extends JFrame {
 			    new Bienvenida().setVisible(true);
 			}
 		});
-		botonBack.setBounds(43, 476, 179, 41);
+		botonBack.setBounds(43, 465, 179, 41);
 		botonBack.setForeground(new Color(255, 255, 255));
 		botonBack.setBackground(new Color(0, 0, 0));
 		botonBack.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -167,7 +209,6 @@ public class VentanaReportes extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
-		
 		
 	}
 }
