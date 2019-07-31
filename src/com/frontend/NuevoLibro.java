@@ -173,6 +173,10 @@ public class NuevoLibro extends JFrame {
 	contentPane.add(button);
 	
 	JButton botonCancelar = new JButton("Cancelar");
+	botonCancelar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
 	botonCancelar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 	botonCancelar.setBounds(111, 459, 102, 45);
 	contentPane.add(botonCancelar);

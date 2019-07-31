@@ -108,7 +108,7 @@ public class Prestamo implements Serializable{
      * Devuleve la fecha actual
      * @return Una fecha del paquete sql.date
      */
-    private Date getFechaActual(){
+    public Date getFechaActual(){
         Calendar tiempoEnMillis = Calendar.getInstance();
         Date fechaActual = new Date(tiempoEnMillis.getTimeInMillis());
         return fechaActual;

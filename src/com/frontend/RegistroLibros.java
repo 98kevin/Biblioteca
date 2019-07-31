@@ -60,6 +60,7 @@ public class RegistroLibros extends JFrame {
 	btnNuevo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    setVisible(false);
+		    new NuevoLibro().setVisible(true);
 		    
 		}
 	});
