@@ -168,6 +168,11 @@ public class NuevoLibro extends JFrame {
 	contentPane.add(editorial);
 	
 	JButton button = new JButton("Aceptar");
+	button.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    
+		}
+	});
 	button.setFont(new Font("Tahoma", Font.PLAIN, 18));
 	button.setBounds(353, 459, 102, 45);
 	contentPane.add(button);

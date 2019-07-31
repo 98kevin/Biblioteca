@@ -4,7 +4,9 @@ package com.backend;
 import java.io.File;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -172,7 +174,7 @@ public class Prestamo implements Serializable{
         	Date fechaActual= new Date(Calendar.getInstance().getTimeInMillis());
         	int diaInicial= (int) (fechaInicial.getTime())/86400000;
         	int diaFinal = (int) (fechaActual.getTime())/86400000;
-        	return (diaFinal - diaInicial)+1;
+        	return (diaFinal - diaInicial);
     }
     
     private String getPathOfFile(Prestamo p){
@@ -237,6 +239,16 @@ public class Prestamo implements Serializable{
 	    costo[1]=0;
 	}
 	return costo;
+    }
+    
+    public Object [][] getRows(ArrayList<Prestamo> lista){
+	Object [][] registros = new Object[lista.size()][3];
+	for (int i = 0; i < lista.size(); i++) {
+	    registros[i][0]=lista.get(i).getCodigoLibro();
+	    registros[i][1]=lista.get(i).getCarnet();
+	    registros[i][2]=lista.get(i).getFecha();
+	}
+	return registros;
     }
     
 }
