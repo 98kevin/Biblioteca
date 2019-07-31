@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.backend.Estudiante;
+import com.backend.Libro;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -153,15 +153,15 @@ public class NuevoLibro extends JFrame {
 	JButton botonAceptar1 = new JButton("Aceptar");
 	botonAceptar1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			/*if (tieneCamposLlenos(titulo, autor, libro)) {
-				   Estudiante st = new Estudiante();
-				   st.ingresarDatos(cajaCarnet, cajaNombre, cajaCarrera, cajaDia, cajaMes, cajaAnio);
+			if (tieneCamposLlenos(codigoLibro, titulo, autor,copias)) {
+				   Libro li = new Libro();
+				   li.ingresarDatos(codigoLibro,titulo , autor, copias, cajaAnio,cajaMes, cajaDia,editorial);
 				   setVisible(false);
-				   new RegistroEstudiantes().setVisible(true);
+				   new RegistroLibros().setVisible(true);
 			       }else {
 				JOptionPane.showMessageDialog(null, "Falta datos por ingresar", "Campos obligatorios faltantes", JOptionPane.INFORMATION_MESSAGE);
 			    }
-			       setVisible(false);*/
+			       setVisible(false);
 		}
 		
 	});
@@ -181,7 +181,7 @@ public class NuevoLibro extends JFrame {
 	contentPane.add(botonCancelar);
     }
     
-    private boolean tieneCamposLlenos(JTextField campo1, JTextField campo2, JComboBox<String> campo3) {
-	return (campo1.getText()!="" & campo2.getText()!="" & campo3.getSelectedIndex()>=0);
+    private boolean tieneCamposLlenos(JTextField campo1, JTextField campo2, JTextField campo3, JTextField campo4) {
+    	return (campo1.getText()!="" & campo2.getText()!="" & campo3.getText()!="" & campo4.getText()!="");
     }
 }

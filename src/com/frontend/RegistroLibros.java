@@ -69,7 +69,7 @@ public class RegistroLibros extends JFrame {
 		    
 		}
 	});
-	btnNuevo.setBounds(658, 56, 80, 37);
+	btnNuevo.setBounds(762, 67, 105, 45);
 	contentPane.add(btnNuevo);
 	
 	tablaDeLibros = new JTable();
@@ -87,14 +87,6 @@ public class RegistroLibros extends JFrame {
 	Object [][] filas= new Libro().returnRows(books);
 	table_1.setModel( new DefaultTableModel(filas, columnas));
 	scrollPane.setViewportView(table_1);
-	JButton btnEditarCopias = new JButton("Editar Copias");
-	btnEditarCopias.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		}
-	});
-	btnEditarCopias.setFont(new Font("Tahoma", Font.PLAIN, 15));
-	btnEditarCopias.setBounds(748, 56, 119, 37);
-	contentPane.add(btnEditarCopias);
 	
 	JButton btnAceptar = new JButton("Aceptar");
 	btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
